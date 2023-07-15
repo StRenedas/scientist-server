@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { MongooseModule } from '@nestjs/mongoose'
 import { ArticlesModule } from './articles/articles.module'
-import { ScientistController } from './scientist/scientist.controller';
-import { ScientistService } from './scientist/scientist.service';
-import { ScientistModule } from './scientist/scientist.module';
+import { ScientistController } from './scientist/scientist.controller'
+import { ScientistService } from './scientist/scientist.service'
+import { ScientistModule } from './scientist/scientist.module'
 
 @Module({
   imports: [

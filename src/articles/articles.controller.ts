@@ -1,28 +1,50 @@
-import { Controller, Delete, Get, Patch, Post } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common'
 import { Article } from './article.schema'
 import { ArticlesService } from './articles.service'
+import { CreateArticleDto } from './dto/create-article.dto'
 
 @Controller('articles')
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
   @Get()
   async findAll(): Promise<Article[]> {
-    return this.articlesService.findAll()
+    try {
+      return await this.articlesService.findAll()
+    } catch (e) {
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: 'Failed to get articles, please try again.',
+        },
+        HttpStatus.FORBIDDEN,
+        { cause: e },
+      )
+    }
   }
-  @Get()
-  findOne(): string {
-    return 'This action returns one article'
+  @Get(':title')
+  async findOne(@Param('title') title: string): Promise<Article> {
+    return await this.articlesService.findOne(title)
   }
   @Post()
-  createOne(): string {
-    return 'This action returns created article'
+  async create(@Body() createArticleDto: CreateArticleDto): Promise<Article> {
+    return await this.articlesService.create(createArticleDto)
   }
   @Patch()
-  updateOne(): string {
+  update(): string {
     return 'This action returns updated article'
   }
   @Delete()
-  deleteOne(): string {
+  delete(): string {
     return 'This action returns deleted article'
   }
 }
