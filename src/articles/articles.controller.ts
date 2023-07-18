@@ -6,8 +6,8 @@ import {
   HttpException,
   HttpStatus,
   Param,
-  Patch,
   Post,
+  Put,
 } from '@nestjs/common'
 import { Article } from './article.schema'
 import { ArticlesService } from './articles.service'
@@ -39,7 +39,7 @@ export class ArticlesController {
   async create(@Body() createArticleDto: CreateArticleDto): Promise<Article> {
     return await this.articlesService.create(createArticleDto)
   }
-  @Patch()
+  @Put()
   update(): string {
     return 'This action returns updated article'
   }

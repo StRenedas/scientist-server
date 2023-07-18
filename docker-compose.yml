@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  server:
+    build: .
+    env_file:
+      - .env.docker
+    ports:
+      - ${PORT}:${PORT}
+    command: npm run start
+    networks:
+      - webnet
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    restart: always
+    env_file:
+      - .env.docker
+    networks:
+      - webnet
+    volumes:
+      - mongo:/data/db
+    ports:
+      - "27017:27017"
+networks:
+  webnet:
+volumes:
+  mongo:

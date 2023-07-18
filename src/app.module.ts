@@ -9,7 +9,7 @@ import { ScientistModule } from './scientist/scientist.module'
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGODB_URI, { dbName: 'ScientistDB' }),
+    MongooseModule.forRoot(process.env.MONGO_URI, { dbName: 'ScientistDB' }),
     ArticlesModule,
     ScientistModule,
   ],
