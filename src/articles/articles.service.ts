@@ -18,7 +18,7 @@ export class ArticlesService {
     return this.articleModel.findOne({ title })
   }
 
-  async create(article: CreateArticleDto): Promise<Article> {
-    return this.articleModel.create(article)
+  async create(createArticleDto: CreateArticleDto): Promise<Article> {
+    return this.articleModel.create(createArticleDto)
   }
 }
