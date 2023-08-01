@@ -4,31 +4,7 @@ import { HydratedDocument } from 'mongoose'
 export type ArticleDocument = HydratedDocument<Article>
 
 @Schema()
-export class Article {
-  @Prop()
-  title: string
-
-  @Prop()
-  authors: string
-
-  @Prop()
-  abstract: string
-
-  @Prop()
-  published_journal: string
-
-  @Prop()
-  published_year: number
-
-  @Prop()
-  published_volume: number
-
-  @Prop()
-  published_number: number
-
-  @Prop()
-  pages: string
-
+class ArticleLinks {
   @Prop()
   pdf: string
 
@@ -49,6 +25,33 @@ export class Article {
 
   @Prop()
   rsci: string
+}
+
+@Schema()
+export class Article {
+  @Prop({ unique: true })
+  title: string
+
+  @Prop()
+  authors: string
+
+  @Prop()
+  abstract: string
+
+  @Prop()
+  published_journal: string
+
+  @Prop()
+  published_year: string
+
+  @Prop()
+  published_volume: string
+
+  @Prop()
+  published_number: string
+
+  @Prop()
+  pages: string
 
   @Prop()
   cite: string
@@ -58,6 +61,9 @@ export class Article {
 
   @Prop()
   is_conference: boolean
+
+  @Prop()
+  links: ArticleLinks
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article)

@@ -36,8 +36,12 @@ export class ArticlesController {
     return await this.articlesService.findOne(title)
   }
   @Post()
-  async create(@Body() createArticleDto: CreateArticleDto): Promise<Article> {
-    return await this.articlesService.create(createArticleDto)
+  async create(@Body() createArticleDto: CreateArticleDto) {
+    await this.articlesService.create(createArticleDto)
+    return {
+      message: 'Статья успешно создана!',
+    }
+    //return await this.articlesService.create(createArticleDto)
   }
   @Put()
   update(): string {
